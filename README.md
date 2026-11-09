@@ -2,6 +2,11 @@
 
 > **Production-ready, mobile-first responsive web application for small private money lenders in India to track loans, monthly simple interest, repayments, and automated WhatsApp/Push reminders.**
 
+[![Live Web App](https://img.shields.io/badge/Live_App-project--2--a4615.web.app-059669?style=for-the-badge&logo=firebase&logoColor=white)](https://project-2-a4615.web.app)
+[![PWA Installable](https://img.shields.io/badge/PWA-Installable-blue?style=for-the-badge&logo=pwa&logoColor=white)](https://project-2-a4615.web.app)
+
+🌐 **Live Deployed URL:** **[https://project-2-a4615.web.app](https://project-2-a4615.web.app)**
+
 ---
 
 ## 🌟 Key Highlights
