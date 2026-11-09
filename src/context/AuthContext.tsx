@@ -7,6 +7,8 @@ import {
   signOut,
   sendPasswordResetEmail,
   updateProfile,
+  GoogleAuthProvider,
+  signInWithPopup,
 } from 'firebase/auth';
 import { auth, isFirebaseConfigured } from '../firebase/config';
 
@@ -22,6 +24,7 @@ interface AuthContextType {
   loading: boolean;
   isDemoMode: boolean;
   login: (email: string, pass: string) => Promise<void>;
+  loginWithGoogle: () => Promise<void>;
   signup: (email: string, pass: string, name?: string) => Promise<void>;
   logout: () => Promise<void>;
   resetPassword: (email: string) => Promise<void>;
@@ -90,6 +93,23 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     await signInWithEmailAndPassword(auth, email, pass);
   };
 
+  const loginWithGoogle = async () => {
+    if (!isFirebaseConfigured || isDemoMode) {
+      localStorage.setItem('udhaar_demo_session', 'true');
+      localStorage.setItem('udhaar_demo_email', 'google.lender@udhaarbook.in');
+      setIsDemoMode(true);
+      setCurrentUser({
+        uid: 'demo-google-uid',
+        email: 'google.lender@udhaarbook.in',
+        displayName: 'Google Lender',
+        isDemo: true,
+      });
+      return;
+    }
+    const provider = new GoogleAuthProvider();
+    await signInWithPopup(auth, provider);
+  };
+
   const signup = async (email: string, pass: string, name?: string) => {
     if (!isFirebaseConfigured) {
       localStorage.setItem('udhaar_demo_session', 'true');
@@ -152,6 +172,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         loading,
         isDemoMode,
         login,
+        loginWithGoogle,
         signup,
         logout,
         resetPassword,
